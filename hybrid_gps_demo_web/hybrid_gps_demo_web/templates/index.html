@@ -1,0 +1,61 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>GPS Spoofing Detector — Hybrid CNN→LSTM→Transformer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container">
+      <h1>GPS Spoofing Detector <span class="muted">Hybrid CNN→LSTM→Transformer</span></h1>
+
+      {% if load_banner %}
+      <div class="banner">{{ load_banner }}</div>
+      {% endif %}
+
+      <p class="desc">
+        Upload a single-sequence CSV with columns: <code>pseudorange,snr,doppler</code> ({{ input_len }} rows recommended).
+        Or try a synthetic sample below.
+      </p>
+
+      <form method="POST" action="/predict" enctype="multipart/form-data" class="card">
+        <label>Select CSV file</label>
+        <input type="file" name="file" accept=".csv">
+        <div class="actions">
+          <button type="submit" name="action" value="upload">Predict from CSV</button>
+          <button type="submit" name="action" value="synthetic-benign" class="secondary">Synthetic Benign</button>
+          <button type="submit" name="action" value="synthetic-spoof" class="secondary">Synthetic Spoof</button>
+        </div>
+      </form>
+
+      {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="flash {{ category }}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+      {% endwith %}
+
+      {% if result %}
+      <div class="card">
+        <h2>Result</h2>
+        <pre>{{ result }}</pre>
+        <p class="hint">Interpretation: <b>pred_label</b> = 1 → "Spoof Detected", 0 → "Likely Benign".</p>
+      </div>
+      {% endif %}
+
+      {% if roc_available %}
+      <div class="card">
+        <h2>Model ROC</h2>
+        <img src="{{ url_for('static', filename='roc_plot.png') }}" alt="ROC curve">
+      </div>
+      {% endif %}
+
+      <footer>
+        <p>Hybrid Demo • Local Flask App • Use for research demos only</p>
+      </footer>
+    </div>
+  </body>
+</html>
