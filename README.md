@@ -61,26 +61,6 @@ requirements.txt — dependencies for local setup
 
 ---
 
-**Quick Start**
-
-1. Navigate to the demo folder:
-cd hybrid_gps_demo
-
-2. (Optional) Create a virtual environment:
-- python -m venv .venv
-- source .venv/bin/activate  # Windows: .venv\Scripts\activate
-
-3. Install dependencies:
-- pip install -r requirements.txt
-
-4. Train the model:
-- python train_hybrid_demo.py --samples 1200 --seq-len 256 --epochs 8 --batch-size 64
-
-5. Run a quick prediction:
-- python predict_demo.py --synthetic --seq-len 256 --spoof
-
----
-
 **Outputs**
 
 After training, the demo produces an artifacts/ directory containing:
