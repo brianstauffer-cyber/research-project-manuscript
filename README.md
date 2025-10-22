@@ -32,8 +32,79 @@ I evaluated **LSTM**, **CNN**, and **Transformer** deep learning models, and fou
 ## What You’ll Find
 - `Brian_Stauffer_Final_Manuscript_8_22_25.pdf` – Full manuscript with methodology, analysis, and findings.  
 - Model comparison and future research recommendations.  
+- Demo Code
+  
+---
+
+## Demo Code
+Hybrid GPS Spoofing Detection Demo
+
+This repository includes a working hybrid deep-learning demo implementing a CNN → LSTM → Transformer architecture for GPS spoofing detection in autonomous systems.
+
+The demo illustrates the practical application of the concepts described in the manuscript, showing how hybrid temporal–spatial–attention modeling improves robustness against coordinated GNSS spoofing attacks.
+
+📁 Folder: /hybrid_gps_demo
+
+Contents:
+
+data_gen.py — synthetic GNSS data generator (pseudorange, SNR, Doppler)
+
+model_hybrid.py — hybrid deep-learning architecture (Conv1D, LSTM, MultiHeadAttention)
+
+train_hybrid_demo.py — trains the model and saves results to /artifacts
+
+predict_demo.py — runs predictions on a CSV or new synthetic sequence
+
+README.md — step-by-step setup and usage
+
+requirements.txt — dependencies for local setup
 
 ---
 
-## Acknowledgements
-Thanks to **Dr. Aeron Zentner, D.B.A.** and **Dr. Tobi West, Ph.D.** at Coastline College for their guidance and mentorship.
+**Quick Start**
+
+1. Navigate to the demo folder:
+cd hybrid_gps_demo
+
+2. (Optional) Create a virtual environment:
+- python -m venv .venv
+- source .venv/bin/activate  # Windows: .venv\Scripts\activate
+
+3. Install dependencies:
+- pip install -r requirements.txt
+
+4. Train the model:
+- python train_hybrid_demo.py --samples 1200 --seq-len 256 --epochs 8 --batch-size 64
+
+5. Run a quick prediction:
+- python predict_demo.py --synthetic --seq-len 256 --spoof
+
+---
+
+**Outputs**
+
+After training, the demo produces an artifacts/ directory containing:
+
+- model.keras — trained Keras model
+
+- roc_plot.png — ROC curve image
+
+- history.json, metrics.json — training metrics
+
+- summary.txt — textual report with classification results
+
+- example_sequence.csv — sample input for prediction testing
+
+---
+
+**Model Summary**
+
+The model fuses:
+
+- CNN layers to capture local spectral features
+
+- LSTM layers to model temporal dependencies
+
+- Transformer attention to focus on anomalous temporal patterns across satellites
+
+This hybrid approach increases detection reliability under diverse spoofing strategies, achieving target metrics of Pd ≥ 95% and Pfa ≤ 1% in controlled synthetic trials.
