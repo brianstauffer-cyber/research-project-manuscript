@@ -30,7 +30,8 @@ I evaluated **LSTM**, **CNN**, and **Transformer** deep learning models, and fou
 ---
 
 ## What You’ll Find
-- `Brian_Stauffer_Final_Manuscript_8_22_25.pdf` – Full manuscript with methodology, analysis, and findings.  
+- `Stauffer_GPS_Spoofing.pdf` – Full manuscript with methodology, analysis, and findings.
+- `Publication Version.pdf` – Publication version of GPS Spoofing manuscript.
 - Model comparison and future research recommendations.  
 - Demo Code
   
